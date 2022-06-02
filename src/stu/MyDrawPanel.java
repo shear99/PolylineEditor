@@ -20,8 +20,10 @@ public class MyDrawPanel extends JPanel {
 
         int numlines = mPolyline.getNumPts() - 1;
         for (int i = 0; i < numlines; i++) {
-            Point p0 = mPolyline.getPoint(i);
-            Point p1 = mPolyline.getPoint(i + 1);
+            PolyPoint p0 = mPolyline.getPoint(i);
+            PolyPoint p1 = mPolyline.getPoint(i + 1);
+            if(p0.getEgdePoint() || p1.getEgdePoint())
+                continue;
             g.drawLine((int) p0.getX(), (int) p0.getY(), (int) p1.getX(), (int) p1.getY());
         }
 
@@ -29,7 +31,9 @@ public class MyDrawPanel extends JPanel {
         g.setColor(Color.RED);
         int numpts = mPolyline.getNumPts();
         for (int i = 0; i < numpts; i++) {
-            Point p = mPolyline.getPoint(i);
+            PolyPoint p = mPolyline.getPoint(i);
+            if(p.getEgdePoint())
+                continue;
             g.fillRect((int)p.getX()-5, (int)p.getY()-5, 10, 10);
 
         }

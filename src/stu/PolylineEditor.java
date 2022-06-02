@@ -17,13 +17,24 @@ public class PolylineEditor {
         Polyline pline = new Polyline();
         drawPanel.setmPolyline(pline);
         drawPanel.addMouseListener(pline);
+        drawPanel.addMouseMotionListener(pline);
 
         frame.getContentPane().add(BorderLayout.CENTER, drawPanel);
 
         JButton clearButton = new JButton("clear");
-        frame.getContentPane().add(BorderLayout.SOUTH, clearButton);
+        JButton closedButton = new JButton("closed");
+        JPanel panel = new JPanel();
+        frame.add(BorderLayout.SOUTH, panel);
+        panel.add(clearButton);
+        panel.add(closedButton);
+
         clearButton.addActionListener((event) -> {
             pline.clear(); drawPanel.repaint();});
+
+        closedButton.addActionListener((event) -> {
+            pline.closedPoint();
+            drawPanel.repaint();
+        });
 
         BorderLayout layout = (BorderLayout) frame.getContentPane().getLayout();
         layout.setHgap(10);
